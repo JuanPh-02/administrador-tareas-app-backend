@@ -20,6 +20,6 @@ app.use('/api/autenticacion', authRoutes);
 app.use('/api/usuarios', userRoutes);
 app.use('/api/tareas', taskRoutes);
 app.use('/api/compartido', shareRoutes);
-// app.use('/', (req, res) => res.json("Bienvenido al Backend"))
+app.get('/', (req, res) => res.json("Bienvenido al Backend"))
 
 module.exports = app;

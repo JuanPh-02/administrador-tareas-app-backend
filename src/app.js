@@ -16,9 +16,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Rutas
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/tasks', taskRoutes);
-app.use('/api/shares', shareRoutes);
+app.use('/api/autenticacion', authRoutes);
+app.use('/api/usuarios', userRoutes);
+app.use('/api/tareas', taskRoutes);
+app.use('/api/compartido', shareRoutes);
+// app.use('/', (req, res) => res.json("Bienvenido al Backend"))
 
 module.exports = app;

@@ -1,17 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
-// Ruta de prueba
-router.get('/ping', (req, res) => {
-  res.json({ message: 'pong 🏓' });
-});
+const {
+  createTask,
+  getMyTasks,
+  getSharedTasks,
+  updateTask,
+  deleteTask,
+  updateTaskStatus
+} = require('../controllers/tasks.controller');
 
-router.post('/nueva-tarea', (req, res) => {
-  res.json({ message: 'Creo la tarea correctamente' });
-});
+// Crear una nueva tarea
+router.post('/nueva', createTask);
 
-router.put('/actualizar-tarea',  (req, res) => {
-  res.json({ message: 'Actualizó la tarea correctamente' });
-})
+// Obtener tareas del usuario
+router.get('/obtener', getMyTasks);
+
+// Obtener tareas compartidas conmigo
+router.get('/compartidas', getSharedTasks);
+
+// Actualizar una tarea por ID
+router.put('/actualizar/:id', updateTask);
+
+// Actualizar estado de tarea por ID
+router.patch('/:id/estado', updateTaskStatus);
+
+// Eliminar una tarea por ID
+router.delete('/eliminar/:id', deleteTask);
 
 module.exports = router;

@@ -9,7 +9,7 @@ const taskRoutes = require('./routes/tasks.routes');
 const shareRoutes = require('./routes/shares.routes');
 
 const app = express();
-
+ 
 // Middlewares
 app.use(cors());
 app.use(morgan('dev'));

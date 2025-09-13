@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "e9a6b274-4d4a-4774-8a67-37703e3d2d9b",
+		"name": "AdministradorTareasApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14323487"
+	},
+	"item": [
+		{
+			"name": "Tareas",
+			"item": [
+				{
+					"name": "crearTarea",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Nueva tarea\",\r\n    \"descripcion\": \"Descripcion de la tarea\",\r\n    \"estado\": \"pendiente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tareas/nueva",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tareas",
+								"nueva"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizarTarea",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Crear el backend\",\r\n    \"descripcion\": \"Se va a crear con express js\",\r\n    \"estado\": \"pendiente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tareas/actualizar/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tareas",
+								"actualizar",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerTareas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/tareas/obtener",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tareas",
+								"obtener"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarTarea",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/tareas/eliminar/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tareas",
+								"eliminar",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizarEstado",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estado\": \"en_progreso\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tareas/2/estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tareas",
+								"2",
+								"estado"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": []
+		},
+		{
+			"name": "Compartido",
+			"item": []
+		},
+		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "registroUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo Arroyave\",\r\n    \"correo\": \"juanph02@outlook.com\",\r\n    \"password\": \"Admin1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/autenticacion/registro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"autenticacion",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logueoUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\": \"juanph02@outlook.com\",\r\n    \"password\": \"Admin1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/autenticacion/logueo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"autenticacion",
+								"logueo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

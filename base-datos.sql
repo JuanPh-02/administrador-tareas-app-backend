@@ -1,7 +1,7 @@
 -- Crear la base de datos
-CREATE DATABASE IF NOT EXISTS task-manager-db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS taskmanagerdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE task-manager-db;
+USE taskmanagerdb;
 
 -- Tabla de usuarios
 CREATE TABLE usuarios (

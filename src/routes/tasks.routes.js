@@ -7,7 +7,8 @@ const {
   getSharedTasks,
   updateTask,
   deleteTask,
-  updateTaskStatus
+  updateTaskStatus,
+  getMyTaskById
 } = require('../controllers/tasks.controller');
 const authenticateToken = require('../middleware/auth');
 
@@ -16,6 +17,9 @@ router.post('/nueva', authenticateToken, createTask);
 
 // Obtener tareas del usuario
 router.get('/obtener', authenticateToken, getMyTasks);
+
+// Obtener tarea por ID
+router.get('/obtener/:id', authenticateToken, getMyTaskById);
 
 // Actualizar una tarea por ID
 router.put('/actualizar/:id', authenticateToken, updateTask);

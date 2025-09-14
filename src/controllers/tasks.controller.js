@@ -34,6 +34,23 @@ const getMyTasks = async (req, res) => {
     }
 };
 
+// Listar tarea del usuario por ID (propia)
+const getMyTaskById = async (req, res) => {
+    const tareaId = req.params.id;
+    const usuarioId = req.user.id;
+
+    try {
+        const [tasks] = await db.query(
+            'SELECT * FROM tareas WHERE id = ? AND usuarioId = ?',
+            [tareaId, usuarioId]
+        );
+        res.json(tasks);
+    } catch (error) {
+        console.error('Error al obtener tareas:', error);
+        res.status(500).json({ error: 'Error al obtener tareas' });
+    }
+};
+
 // Actualizar tarea (solo dueño)
 const updateTask = async (req, res) => {
     const tareaId = req.params.id;
@@ -105,6 +122,7 @@ const deleteTask = async (req, res) => {
 module.exports = {
     createTask,
     getMyTasks,
+    getMyTaskById,
     updateTask,
     updateTaskStatus,
     deleteTask

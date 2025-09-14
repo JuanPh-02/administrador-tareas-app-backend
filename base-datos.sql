@@ -27,7 +27,7 @@ CREATE TABLE tareas (
 );
 
 -- Tabla de tareas compartidas
-CREATE TABLE compartidos (
+CREATE TABLE tareas_compartidas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tareaId INT NOT NULL,
     usuarioId INT NOT NULL,

@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+const db = require('../config/db');
 const { sendVerificationEmail } = require('../utils/email');
 const { hashPassword, comparePassword } = require('../utils/hash');
 const { generateToken } = require('../utils/jwt');
@@ -25,7 +25,7 @@ const register = async (req, res) => {
 
     try {
         // Verificar si el usuario ya existe
-        const [rows] = await pool.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+        const [rows] = await db.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
         if (rows.length > 0) {
             return res.status(400).json({ message: 'El correo ya está registrado' });
         }
@@ -37,7 +37,7 @@ const register = async (req, res) => {
         const verificationToken = crypto.randomBytes(32).toString('hex');
 
         // Insertar usuario
-        const [result] = await pool.query(
+        const [result] = await db.query(
             'INSERT INTO usuarios (nombre, correo, password, tokenVerificacion) VALUES (?, ?, ?, ?)',
             [nombre, correo, hashedPassword, verificationToken]
         );
@@ -57,14 +57,14 @@ const verifyEmail = async (req, res) => {
     const { token } = req.query;
 
     try {
-        const [users] = await pool.query('SELECT * FROM usuarios WHERE tokenVerificacion = ?', [token]);
+        const [users] = await db.query('SELECT * FROM usuarios WHERE tokenVerificacion = ?', [token]);
         const user = users[0];
 
         if (!user) {
             return res.status(400).json({ error: 'Token inválido o expirado' });
         }
 
-        await pool.query(
+        await db.query(
             'UPDATE usuarios SET esVerificado = 1, tokenVerificacion = NULL WHERE id = ?',
             [user.id]
         );
@@ -94,7 +94,7 @@ const login = async (req, res) => {
 
     try {
         // Verificar si el usuario existe
-        const [rows] = await pool.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+        const [rows] = await db.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }

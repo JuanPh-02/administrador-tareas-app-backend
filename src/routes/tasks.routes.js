@@ -9,23 +9,21 @@ const {
   deleteTask,
   updateTaskStatus
 } = require('../controllers/tasks.controller');
+const authenticateToken = require('../middleware/auth');
 
 // Crear una nueva tarea
-router.post('/nueva', createTask);
+router.post('/nueva', authenticateToken, createTask);
 
 // Obtener tareas del usuario
-router.get('/obtener', getMyTasks);
-
-// Obtener tareas compartidas conmigo
-router.get('/compartidas', getSharedTasks);
+router.get('/obtener', authenticateToken, getMyTasks);
 
 // Actualizar una tarea por ID
-router.put('/actualizar/:id', updateTask);
+router.put('/actualizar/:id', authenticateToken, updateTask);
 
 // Actualizar estado de tarea por ID
-router.patch('/:id/estado', updateTaskStatus);
+router.patch('/:id/estado', authenticateToken, updateTaskStatus);
 
 // Eliminar una tarea por ID
-router.delete('/eliminar/:id', deleteTask);
+router.delete('/eliminar/:id', authenticateToken, deleteTask);
 
 module.exports = router;

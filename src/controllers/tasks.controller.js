@@ -3,8 +3,7 @@ const db = require('../config/db');
 // Crear una tarea
 const createTask = async (req, res) => {
     const { titulo, descripcion, estado } = req.body;
-    // const userId = req.user.id; 
-    const usuarioId = 3;
+    const usuarioId = req.user.id;
 
     try {
         const [result] = await db.query(
@@ -21,8 +20,7 @@ const createTask = async (req, res) => {
 
 // Listar tareas del usuario (propias)
 const getMyTasks = async (req, res) => {
-    // const userId = req.user.id;
-    const usuarioId = 2;
+    const usuarioId = req.user.id;
 
     try {
         const [tasks] = await db.query(
@@ -36,29 +34,10 @@ const getMyTasks = async (req, res) => {
     }
 };
 
-// Listar tareas compartidas conmigo
-const getSharedTasks = async (req, res) => {
-    const userId = req.user.id;
-
-    try {
-        const [tasks] = await db.query(
-            `SELECT t.*, s.role FROM tareas t
-             JOIN shares s ON t.id = s.id
-             WHERE s.usuarioId = ?`,
-            [userId]
-        );
-        res.json(tasks);
-    } catch (error) {
-        console.error('Error al obtener tareas compartidas:', error);
-        res.status(500).json({ error: 'Error al obtener tareas compartidas' });
-    }
-};
-
 // Actualizar tarea (solo dueño)
 const updateTask = async (req, res) => {
     const tareaId = req.params.id;
-    // const userId = req.user.id;
-    const usuarioId = 2;
+    const usuarioId = req.user.id;
     const { titulo, descripcion, estado } = req.body;
 
     try {
@@ -82,7 +61,7 @@ const updateTask = async (req, res) => {
 const updateTaskStatus = async (req, res) => {
     const tareaId = req.params.id;
     const { estado } = req.body;
-    const usuarioId = 2; // Temporal mientras implementas JWT
+    const usuarioId = req.user.id;
 
     try {
         const [result] = await db.query(
@@ -104,8 +83,7 @@ const updateTaskStatus = async (req, res) => {
 // Eliminar tarea (solo dueño)
 const deleteTask = async (req, res) => {
     const tareaId = req.params.id;
-    // const userId = req.user.id;
-    const usuarioId = 2;
+    const usuarioId = req.user.id;
 
     try {
         const [result] = await db.query(
@@ -127,7 +105,6 @@ const deleteTask = async (req, res) => {
 module.exports = {
     createTask,
     getMyTasks,
-    getSharedTasks,
     updateTask,
     updateTaskStatus,
     deleteTask
